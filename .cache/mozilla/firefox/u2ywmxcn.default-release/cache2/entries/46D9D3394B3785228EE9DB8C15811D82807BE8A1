@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>국민대학교 웹메일</title>
+<link rel="SHORTCUT ICON" href="/favicon.ico" type="image/x-icon" />
+<link rel="ICON" href="/favicon.ico" type="image/x-icon" />
+<link rel="canonical" href="https://apps.kookmin.ac.kr" />
+<meta charset="utf-8" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="국민대학교 웹메일 로그인" />
+<meta name="keywords" content="국민대학교,웹메일,로그인" />
+<meta name="classification" content="국민대학교,웹메일,로그인" />
+
+<!-- Bootstrap Core CSS -->
+<link href="/bootstrap/sbadminv2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Custom Fonts -->
+<link href="/bootstrap/sbadminv2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/js/plugin/jquery-loader/jquery.loader.min.css" rel="stylesheet" />
+<link href="/css/kookmin/font.css" rel="stylesheet" />
+<link href="/css/kookmin/layout.css" rel="stylesheet" />
+<link href="/css/kookmin/common.outside.css" rel="stylesheet" />
+
+<style>
+body {height: 100%;font-family: 'Noto Sans KR', sans-serif;line-height: 1;}
+body *{box-sizing:border-box}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset, p,button {margin: 0;padding: 0}
+li {list-style: none}
+a {color: #222;text-decoration: none;}
+a:link{color: #222;text-decoration:none;}
+a:visited{color: #222;text-decoration:none;}
+a:hover {opacity: 0.8;}
+input[type='text'], input[type='password'],input[type='number']{font-size:15px;background-color:transparent;border:0;border-bottom:1px solid #b2b2b2;width:100%;height:35px;line-height:35px;box-sizing:border-box;color:#666;padding:0 12px}
+.select{width:100%;border:1px solid #ccc;background:#fff url("/images/kookmin/select_arr.png") no-repeat center right 10px;height:32px;line-height:30px;appearance: none;-moz-appearance: none;-webkit-appearance: none;padding:0 30px 0 12px;font-size:14px;color:#003973;border-radius:4px;font-family: 'Noto Sans KR';}
+.select::-ms-expand {display:none}
+.select option{background:#fff;color:#222}
+
+.kmuui000101{min-width:1440px;background:url("/images/kookmin/login_bg.jpg") no-repeat center top;}
+.kmuui000101 .login_wrap{width:100%;width:1196px;height:auto;padding:220px 55px 200px 60px;overflow:hidden;margin:0 auto}
+.kmuui000101 .login_tit .logo{width:241px;height:76px;background:url("/images/kookmin/login_logo.png") no-repeat center;margin-bottom:47px}
+.kmuui000101 .login_tit .logo a{display:block;height:100%;font-size:0;text-indent:-9999em;}
+.kmuui000101 .login_tit{float:left;}
+.kmuui000101 .login_tit .tit{font-size:50px;color:#fff;font-weight:200;letter-spacing:-1.6px;line-height:1.5;text-shadow: 5px 5px 8px rgb(0 0 0 / .3);}
+.kmuui000101 .login_tit .tit > span{font-size:44px}
+.kmuui000101 .login_tit .tit > .star{padding-right:20px;position:relative}
+.kmuui000101 .login_tit .tit > .star:after{content:"";display:block;width:18px;height:18px;background:url("/images/kookmin/login_tit_star.png") no-repeat center;position:absolute;right:0;top:-5px}
+.kmuui000101 .login_box{float:right;width:580px;position:relative}
+.kmuui000101 .login_box > .tit{font-size:34px;letter-spacing:-1px;font-weight:200;color:#fff;text-align:center;margin-bottom:28px;position:absolute;left:0;bottom:100%;width:100%;text-shadow: 2px 2px 6px rgb(0 0 0 / .1);}
+.kmuui000101 .login_box .box{border-radius:20px;box-sizing:border-box;background:#fff;box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);position:relative;overflow:hidden}
+.kmuui000101 .login_box .box_inner{padding:46px 40px 44px;background:url("/images/kookmin/login_box_bg.png") no-repeat right bottom}
+.kmuui000101 .login_box .box_inner .box_tit{position:relative}
+.kmuui000101 .login_box .box_inner .box_tit .tit{font-size:26px;color:#004183;}
+.kmuui000101 .login_box .box_inner .box_tit .txt{font-size:15px;color:#666;margin-top:14px}
+.kmuui000101 .login_box .box_inner .box_tit .select{position:absolute;right:0;top:0;width:auto;min-width:94px;z-index:1}
+.kmuui000101 .login_box dl{font-size:14px}
+.kmuui000101 .login_box dt{margin:26px 0 7px;padding:0 0 0 28px;line-height:20px;font-size:15px;color:#333;font-weight:600;background-repeat:no-repeat;background-position:left center}
+.kmuui000101 .login_box dt.icon01{background-image:url("/images/kookmin/login_box_icon01.png")}
+.kmuui000101 .login_box dt.icon02{background-image:url("/images/kookmin/login_box_icon02.png")}
+.kmuui000101 .login_box .fixed_input{position:relative}
+.kmuui000101 .login_box .fixed_input > input{padding-right:120px}
+.kmuui000101 .login_box .fixed_input .txt{display:inline-block;vertical-align:top;line-height:32px;color:#333;position:absolute;right:12px;top:0;font-size:15px}
+.kmuui000101 .login_box .btn_wrap{margin-top:28px;text-align:center}
+.kmuui000101 .login_box .btn_wrap .btn_login01{display:block;margin:0 auto;max-width:354px;height:48px;line-height:48px;font-size:15px;text-align:center;background:#004f9f;color:#fff;border-radius:5px}
+.kmuui000101 .login_chk{margin-top:14px;padding:0 10px}
+.kmuui000101 .login_chk .checkBox{display:inline-block;vertical-align:top}
+.kmuui000101 .login_chk .checkBox:after{content:"";display:block;clear:both}
+.kmuui000101 .login_chk .checkBox input{display:none}
+.kmuui000101 .login_chk .checkBox .ico{width:20px;height:20px;display:inline-block;vertical-align:top;background:#fff;border:1px solid #666}
+.kmuui000101 .login_chk .checkBox .txt{font-size:13px;color:#666;vertical-align:top;line-height:20px;padding-left:5px}
+.kmuui000101 .login_chk .checkBox input:checked + .ico{border-color:#157cd4;background:#1292ff url("/images/kookmin/chk_icon.png") no-repeat center}
+.kmuui000101 .login_chk .find_link{float:right;display:flex}
+.kmuui000101 .login_chk .find_link > li{position:relative}
+.kmuui000101 .login_chk .find_link > li + li{padding-left:15px}
+.kmuui000101 .login_chk .find_link > li + li:after{content:"";display:block;width:1px;height:10px;background:#999;position:absolute;left:8px;top:50%;margin-top:-5px}
+.kmuui000101 .login_chk .find_link > li > a{font-size:13px;color:#666;display:block;line-height:20px}
+.kmuui000101 .footer_wrap{width:100%;letter-spacing:-0.6px;text-align:center;background:#242a2f;padding:14px 0}
+.kmuui000101 .footer_wrap *{font-size:13px;color:#f4f4f4;line-height:1.6}
+.kmuui000101 .footer_wrap .footer_txt > li{display:inline-block;vertical-align:top;padding:0 10px;position:relative}
+.kmuui000101 .footer_wrap .footer_txt > li + li:after{content:"";display:block;width:1px;height:10px;background:#f4f4f4;position:absolute;left:0px;top:5px}
+.kmuui000101 .footer_wrap .footer_txt > li > a{display:block}
+</style>
+
+<!-- Core Scripts -->
+<script src="/js/jquery-2.1.4.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/plugin/jquery-loader/jquery.loader.min.js"></script>
+<script src="/js/plugin/carhartl-jquery-cookie/jquery.cookie.js"></script>
+
+<!-- Common Scripts -->
+<script src="/js/common.js"></script>
+</head>
+<body class="kmuui000101">
+<div class="modal fade" id="modal-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="padding:20px;text-align:center;background-image:url('/js/plugin/jquery-loader/ajax-loader.gif');background-position:center center;background-repeat:no-repeat;">&nbsp;</div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<header>
+  <div class="header_wrap"></div>
+</header>
+<iframe id="f_googleLogout" src="https://www.google.com/accounts/Logout?continue=https%3A%2F%2Fmail.google.com%2F" width="100%" height="0" style="display: none; visibility: hidden;"></iframe>
+<form name="loginForm" id="loginForm" action="https://apps.kookmin.ac.kr/GoogleAppsSSORequest" method="POST" role="form">
+<section class="login_wrap">
+  <div class="login_tit">
+    <h1 class="logo">
+      <a href="/" title="국민대학교">국민대학교</a>
+    </h1>
+    <h2 class="tit">
+      <span>4차 산업혁명의 리더</span><br/>
+      <strong>도전</strong>하는 <strong class="star">국민</strong>인
+    </h2>
+  </div>
+  <div class="login_box">
+    <h3 class="tit">국민대학교 <strong>웹메일</strong></h3>
+    <div class="box">
+      <div class="box_inner">
+        <div class="box_tit">
+          <h4 class="tit">LOGIN</h4>
+          <p class="txt">로그인 후, 국민대학교 웹메일을 사용해 보세요.</p>
+          <select class="select" name="language" id="language" title="Language" onchange="doSelect(this.value);">
+            <option value="*">Language</option>
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <dl>
+          <dt class="icon01">아이디</dt>
+          <dd>
+            <div class="fixed_input">
+              <input type="text" placeholder="아이디" name="primaryId" id="primaryId" style="text-transform:lowercase;" maxlength="50" value="" required="required" autofocus="autofocus"/>
+              <span class="txt">@ kookmin.ac.kr</span>
+            </div>
+          </dd>
+          <dt class="icon02">비밀번호</dt>
+          <dd><input type="password" placeholder="비밀번호" name="password" id="password" maxlength="25" style="ime-mode:disabled" required="required"/></dd>
+        </dl>
+        <input type="hidden" name="SAMLRequest" value="fVLJbsIwEL1X6j9EvmdDbVVZJIiCUJG6RBB66M04k2Bw7NTjQPv3NQEEPZTr85u3jKc/+K6ltwWDQquExEFEPFBcF0JVCVnkE/+RDNLbmz6yWjZ02NqVmsFXC2g9N6mQdg8JaY2imqFAqlgNSC2n8+HrC+0FEW2MtpprSbzpOCGVFlyt1qWqmopvdFlBU8Cq4k3NykIs1yAqUFI49scpVm8fa4rYwlShZco6KOrFfhz5UZxHD/S+R++iT+JlR6cnoQ4NrsVaHkhIn/M887P3ed4JbEUB5s2x91F1JSHgut7bZwxRbB1cMolAvCEiGOsCjrTCtgYzB7MVHBazl4SsrG2QhuFutwvOMiELN1pvaqECxoONCRlHknbLpV0/c7HV6+nZyZ2kZ/1+eCGVHj9t32U6zrQU/McbSql3IwPMuiLWtK7HRJua2f/d4iDuEFH4ZUelrcIGuCgFFMQL04Pr3+twN/ML"/>
+        <input type="hidden" name="RelayState" value="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.com%2F&amp;hl=ko&amp;ifkv=AU9NCcxnJudIV5YoWeSAL6YKjIQBR_nujS0-FXRTYiEhwA-mXcxDNFP55iM-ATh4XSiKGWUDt_5CdA%3D%3D"/>
+        <input type="hidden" name="app" value=""/>
+        <div class="login_chk">
+          <label class="checkBox" for="remember-me">
+            <input name="remember-me" id="remember-me" type="checkbox" value="remember-me"/>
+            <span class="ico"></span>
+            <span class="txt">아이디 저장</span>
+          </label>
+          <ul class="find_link">
+            <li><a href="/idSearch.do">아이디 찾기</a></li>
+            <li><a href="/passwordFind.do">비밀번호 찾기</a></li>
+          </ul>
+        </div>
+        <div class="btn_wrap">
+          <input type="submit" value="로그인" class="btn btn-lg btn-block" style="color:#fff;background-color:#014f9e;border-color:#014f9e;"/>
+        </div>
+      </div>
+      <div class="footer_wrap">
+        <ul class="footer_txt">
+          <li><a href="https://www.kookmin.ac.kr/user/privacy/index.do" target="_blank">개인정보처리방침</a></li>
+          <li><a href="mailto:sysop@kookmin.ac.kr">문의처: sysop@kookmin.ac.kr</a></li>
+        </ul>
+        <p class="footer_txt">COPYRIGHT &copy; 2020 KOOKMIN UNIVERSITY ALL rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</form>
+<script>
+$(document).ready(function() {
+  $('html, body').animate({scrollTop:100}, 'slow');
+});
+//maxlength 체크
+function maxLengthCheck(obj) {
+  if (obj.value.length > obj.maxLength){
+    obj.value = obj.value.slice(0, obj.maxLength);
+  }
+}
+function doSelect(language) {
+  if (language == '*') return;
+  setCookie("LANGUAGE", language, 365);
+  var frm = document.loginForm;
+  frm.target = '_self';
+  frm.action = "login.jsp";
+  frm.submit();
+}
+$('#loginForm').submit(function(event) {
+  var checkbox = $('#remember-me');
+  if(checkbox.is(':checked')){
+    var primaryId = $('#primaryId').val();
+    $.cookie('remember-me-primaryId', primaryId, { expires: 365 }); //SETS IN DAYS (365 Days)
+  } else {
+    $.removeCookie('remember-me-primaryId');
+  }
+});
+if($.cookie('remember-me-primaryId')) {
+  
+    $('#primaryId').val($.cookie('remember-me-primaryId'));
+  
+  $('#remember-me').attr('checked', true);
+}
+</script>
+</body>
+</html>
+'ݎV�      aV�8aV�9CxQ�aV�8  	    :https://apps.kookmin.ac.kr/?SAMLRequest=fVLJbsIwEL1X6j9EvmdDbVVZJIiCUJG6RBB66M04k2Bw7NTjQPv3NQEEPZTr85u3jKc%2F%2BK6ltwWDQquExEFEPFBcF0JVCVnkE%2F%2BRDNLbmz6yWjZ02NqVmsFXC2g9N6mQdg8JaY2imqFAqlgNSC2n8%2BHrC%2B0FEW2MtpprSbzpOCGVFlyt1qWqmopvdFlBU8Cq4k3NykIs1yAqUFI49scpVm8fa4rYwlShZco6KOrFfhz5UZxHD%2FS%2BR%2B%2BiT%2BJlR6cnoQ4NrsVaHkhIn%2FM887P3ed4JbEUB5s2x91F1JSHgut7bZwxRbB1cMolAvCEiGOsCjrTCtgYzB7MVHBazl4SsrG2QhuFutwvOMiELN1pvaqECxoONCRlHknbLpV0%2Fc7HV6%2BnZyZ2kZ%2F1%2BeCGVHj9t32U6zrQU%2FMcbSql3IwPMuiLWtK7HRJua2f%2Fd4iDuEFH4ZUelrcIGuCgFFMQL04Pr3%2BtwN%2FML&RelayState=https%3A%2F%2Faccounts.google.com%2FCheckCookie%3Fcontinue%3Dhttps%253A%252F%252Fwww.google.com%252F%26hl%3Dko%26ifkv%3DAU9NCcxnJudIV5YoWeSAL6YKjIQBR_nujS0-FXRTYiEhwA-mXcxDNFP55iM-ATh4XSiKGWUDt_5CdA%253D%253D necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 200
+Date: Fri, 01 Oct 2021 06:52:40 GMT
+Content-Type: text/html;charset=UTF-8
+ original-response-headers Date: Fri, 01 Oct 2021 06:52:40 GMT
+Content-Type: text/html;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Set-Cookie: JSESSIONID=9F24FB10B9F0A28D3650CE5653F1F936; Path=/; HttpOnly
+ ctid 1 uncompressed-len 0 net-response-time-onstart 200 net-response-time-onstop 203 predictor::resource-count 23 predictor::https://apps.kookmin.ac.kr/bootstrap/sbadminv2/bower_components/bootstrap/dist/css/bootstrap.min.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/bootstrap/sbadminv2/bower_components/font-awesome/css/font-awesome.min.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/plugin/jquery-loader/jquery.loader.min.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/css/kookmin/font.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/css/kookmin/layout.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/css/kookmin/common.outside.css 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/jquery-2.1.4.min.js 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/bootstrap.min.js 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/plugin/jquery-loader/jquery.loader.min.js 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/plugin/carhartl-jquery-cookie/jquery.cookie.js 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/js/common.js 1,1,1633071160,4097 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_bg.jpg 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_logo.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_tit_star.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_box_bg.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/select_arr.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_box_icon01.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/images/kookmin/login_box_icon02.png 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/css/kookmin/font/NotoSansKR-Light.woff2 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/css/kookmin/font/NotoSansKR-Bold_sm.woff2 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/css/kookmin/font/NotoSansKR-Regular_sm.woff2 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/css/kookmin/font/NotoSansKR-Light.woff 1,1,1633071160,4096 predictor::https://apps.kookmin.ac.kr/css/kookmin/font/NotoSansKR-Light.otf 1,1,1633071160,4096   2�

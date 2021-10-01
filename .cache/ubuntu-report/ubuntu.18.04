@@ -1,0 +1,79 @@
+{
+  "Version": "18.04",
+  "OEM": {
+    "Vendor": "Micro-Star International Co., Ltd.",
+    "Product": "GE76 Raider 10UH",
+    "Family": "GE"
+  },
+  "BIOS": {
+    "Vendor": "American Megatrends Inc.",
+    "Version": "E17K2IMS.10B"
+  },
+  "CPU": {
+    "OpMode": "32-bit, 64-bit",
+    "CPUs": "16",
+    "Threads": "2",
+    "Cores": "8",
+    "Sockets": "1",
+    "Vendor": "GenuineIntel",
+    "Family": "6",
+    "Model": "165",
+    "Stepping": "2",
+    "Name": "Intel(R) Core(TM) i9-10980HK CPU @ 2.40GHz",
+    "Virtualization": "VT-x"
+  },
+  "Arch": "amd64",
+  "GPU": [
+    {
+      "Vendor": "8086",
+      "Model": "9bc4"
+    },
+    {
+      "Vendor": "10de",
+      "Model": "249c"
+    }
+  ],
+  "RAM": 32.7,
+  "Partitions": [
+    959.9,
+    0.5
+  ],
+  "Screens": [
+    {
+      "Size": "381mmx214mm",
+      "Resolution": "3840x2160",
+      "Frequency": "60.01"
+    }
+  ],
+  "Autologin": true,
+  "LivePatch": false,
+  "Session": {
+    "DE": "ubuntu:GNOME",
+    "Name": "ubuntu",
+    "Type": "x11"
+  },
+  "Language": "en_US",
+  "Timezone": "Asia/Seoul",
+  "Install": {
+    "Media": "Ubuntu 18.04.5 LTS \"Bionic Beaver\" - Release amd64 (20200806.1)",
+    "Type": "GTK",
+    "OEM": false,
+    "PartitionMethod": "reinstall_partition",
+    "DownloadUpdates": false,
+    "Language": "en",
+    "Minimal": false,
+    "RestrictedAddons": true,
+    "Stages": {
+      "0": "language",
+      "62": "console_setup",
+      "101": "wireless",
+      "124": "prepare",
+      "141": "partman",
+      "388": "start_install",
+      "447": "timezone",
+      "471": "usersetup",
+      "484": "user_done",
+      "959": "done"
+    }
+  }
+}
